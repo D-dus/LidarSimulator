@@ -16,19 +16,17 @@ print("Server is listening")
 connection,addrClient=sock.accept()
 #####################################################################################
 
-file=open("LidarData.txt",'w')
 try:
 	while(True):
 		data=connection.recv(1000)
-		#print(data.decode('utf-8'))
-		file.write(data.decode('utf-8')+"\n")
+		################# DO SOMETHING WITH THE DATA ########################
+		# data is a string converted into a byte
+		# decoded data looks like float iAngle, float iDistance
+		# the angle is relative to the robot orientation
+		####################################################################
 		messageToSend="OK"
-		connection.send(bytes(messageToSend,'utf-8'))
-		
-		##################################################################		
+		connection.send(bytes(messageToSend,'utf-8'))		
 	connection.close
-	file.close()
 except KeyboardInterrupt:
 	print("Interrupted")
 	connection.close()
-	file.close()
